@@ -1,3 +1,24 @@
+@font-face {
+  font-family: "Minecraft Ten";
+  src: url("/assets/fonts/MinecraftTen.woff2") format("woff2"),
+    url("/assets/fonts/MinecraftTen.woff") format("woff"),
+    url("/assets/fonts/MinecraftTen.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Amongus';
+  src: url('/assets/fonts/Amongus.woff2') format('woff2'),
+      url('/assets/fonts/Amongus.woff') format('woff'),
+      url('/assets/fonts/Amongus.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
@@ -104,8 +125,10 @@ section {
   display: block;
 }
 body {
+  width: 100%;
+  min-height: 100vh;
   line-height: 1;
-  background-color: burlywood;
+  font-family: "Minecraft Ten";
 }
 ol,
 ul {
@@ -126,3 +149,153 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+.game-menu {
+  width: 100%;
+  height: 100vh;
+  background-image: url(/assets/img/png/bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: grid;
+  place-content: center;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 75px;
+}
+
+h1 {
+  font-size: 50px;
+}
+
+.choices {
+  display: flex;
+  align-items: center;
+  gap: 67px;
+  background-image: url(/assets/img/png/choices.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.choices:hover {
+ opacity: 0.7;
+}
+
+.game-choice {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.choices p {
+  font-size: 35px;
+  color: black;
+  font-family: 'Amongus';
+}
+
+.choices img {
+  width: 50px;
+  aspect-ratio: 1/1;
+}
+
+.start {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 90%;
+}
+
+.menu-container {
+  background-image: url(/assets/img/png/panelBg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 40em;
+  height: 40em;
+  display: grid;
+  place-content: center;
+}
+
+.start img {
+  cursor: pointer;
+  width: 100px;
+}
+
+.start button {
+  border: none;
+  background-color: transparent;
+}
+
+
+.input {
+  background-color: #383838;
+  border: 1ex solid none;
+  border-top-width: 0.2em;
+  margin: 0;
+  padding: 0;
+  color: #383838;
+  word-wrap: break-word;
+  outline: 7px solid #383838;
+  height: 30px;
+  font-size: 17px;
+  text-align: center;
+  transition: all 0.5s;
+  max-width: 190px;
+  font-weight: bold;
+}
+
+.input:hover {
+  background-color: #f1e8e8;
+}
+
+.input:focus {
+  background-color: #f1e8e8;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+

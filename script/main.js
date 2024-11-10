@@ -1,9 +1,12 @@
-let userName =  "";
+let userName = "";
 let gameChoosen = "";
 let games = document.querySelectorAll(".choices");
 
 const userInput = document.getElementById("user-input");
 const submitForm = document.getElementById("submitForm");
+
+const choicesSound = new Audio("/assets/sounds/choiceSound.mp3");
+const playSound = new Audio("/assets/sounds/playSound.mp3");
 
 userInput.addEventListener("input", (e) => {
   userName = e.target.value;
@@ -12,7 +15,7 @@ userInput.addEventListener("input", (e) => {
 games.forEach((game) => {
   game.addEventListener("click", (e) => {
     e.preventDefault();
-
+    choicesSound.play();
     games.forEach((g) => {
       g.style.border = "";
       g.style.borderRadius = "";
@@ -36,7 +39,10 @@ submitForm.addEventListener("click", (e) => {
   } else {
     switch (gameChoosen) {
       case "amongUs":
-        window.location.href = "/amongUs.html";
+        playSound.play();
+        setTimeout(() => {
+          window.location.href = "/amongUs.html";
+        },3000)
         break;
       case "minecraft":
         window.location.href = "/minecraft.html";

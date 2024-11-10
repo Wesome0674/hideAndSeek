@@ -1,13 +1,16 @@
-const user = document.getElementById("user")
-const layer = document.getElementById("layer")
+const user = document.getElementById("user");
+const layer = document.getElementById("layer");
 
-user.innerHTML = localStorage.getItem("userName")
+var emergency = new Audio("/assets/sounds/emergencySound.mp3");
 
-const emergencyButton = document.getElementById("buttonEmergency")
+user.innerHTML = localStorage.getItem("userName");
 
-emergencyButton.addEventListener("click", () =>  {
-    emergencyButton.src = "/assets/img/png/emergencyButton2.png"
-    setTimeout(() => {
-        layer.style.display = "none"
-    },1000)
-}) 
+const emergencyButton = document.getElementById("buttonEmergency");
+
+emergencyButton.addEventListener("click", () => {
+  emergencyButton.src = "/assets/img/png/emergencyButton2.png";
+  emergency.play();
+  setTimeout(() => {
+    layer.style.display = "none";
+  }, 1000);
+});

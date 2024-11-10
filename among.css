@@ -1,11 +1,11 @@
 @font-face {
-    font-family: 'VCR OSD Mono';
-    src: url('/assets/fonts/VCROSDMono.woff2') format('woff2'),
-        url('/assets/fonts/VCROSDMono.woff') format('woff'),
-        url('/assets/fonts/VCROSDMono.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: "VCR OSD Mono";
+  src: url("/assets/fonts/VCROSDMono.woff2") format("woff2"),
+    url("/assets/fonts/VCROSDMono.woff") format("woff"),
+    url("/assets/fonts/VCROSDMono.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -138,7 +138,6 @@ body {
   min-height: 100vh;
   line-height: 1;
   font-family: "Minecraft Ten";
- 
 }
 ol,
 ul {
@@ -161,62 +160,95 @@ table {
 }
 .among-container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   background-image: url(/assets/img/png/sky.png);
-  cursor: url('/assets/img/png/knife.png'), auto;	
+  background-size: 100%;
+  cursor: url("/assets/img/png/knife.png"), auto;
 }
 
 .layer-blur {
-  position: absolute;
+  position: fixed;
   display: grid;
   place-content: center;
   width: 100%;
   z-index: 10;
   height: 100%;
-  background-color:rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(7px);
-  cursor: url('/assets/img/png/cursor-hand.png'), auto;	
- 
+  cursor: url("/assets/img/png/cursor-hand.png"), auto;
 }
 
 .game-info {
-    background-image: url(/assets/img/png/tele.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 20em;
-    height: 20em;
-    padding: 30px 30px;
+  background-image: url(/assets/img/png/tele.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20em;
+  height: 20em;
+  padding: 30px 30px;
 }
 
 .user-name {
-    background-image: url(/assets/img/png/plate.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    width: 20em;
-    height: 3em;
-    display: flex;
-    align-items: center;
-    padding-left: 15px;
+  background-image: url(/assets/img/png/plate.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 20em;
+  height: 3em;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
 }
 
-.user-name p{
-    font-size: 20px;
-    color: white;
-    font-family: 'VCR OSD Mono';
+.user-name p {
+  font-size: 20px;
+  color: white;
+  font-family: "VCR OSD Mono";
 }
 
 .info {
-    display: flex;
-    gap: 10px;
-    color: white;
-    font-family: 'Amongus';
-    font-size: 30px;
-    align-items: center;
-    margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  color: white;
+  font-family: "Amongus";
+  font-size: 30px;
+  align-items: center;
+  margin-top: 15px;
 }
 
 .info img {
-    width: 20px;
-   aspect-ratio: 1/1;
+  width: 20px;
+  aspect-ratio: 1/1;
 }
 
+h1 {
+  font-family: "VCR OSD Mono";
+  font-size: 80px;
+  text-align: center;
+  color: white;
+}
+
+.title p {
+  color: #c51111;
+  font-size: 32px;
+  text-align: center;
+  font-family: "VCR OSD Mono";
+}
+
+.title{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  height: max-content;
+}
+
+.hud {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  max-width: 95%;
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.map {
+ 
+}

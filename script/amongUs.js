@@ -14,6 +14,11 @@ const spots = [
     posX: "185px",
     posY: "200px",
   },
+  {
+    img: "assets/img/png/red-among.png",
+    posX: "50px",
+    posY: "200px",
+  },
 ];
 
 const user = document.getElementById("user");

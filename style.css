@@ -197,9 +197,9 @@ h1 {
 }
 
 .choices p {
-  font-size: 35px;
+  font-size: 24px;
   color: black;
-  font-family: var(--amongusFont);
+  font-family: "Poppins";
 }
 
 .choices img {
@@ -267,6 +267,4 @@ h1 {
 .input:focus {
   background-color: #f1e8e8;
 }
-
-
 

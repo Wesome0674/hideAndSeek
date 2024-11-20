@@ -331,3 +331,12 @@ h1 {
     transform: scale(100%);
   }
 }
+
+.jerma {
+  background-image: url(/assets/img/png/jerma.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 70%;
+  height: 70%;
+  margin: 0 auto;
+}

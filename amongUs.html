@@ -7,6 +7,35 @@
     <title>AmongUs hide and seek</title>
   </head>
   <body>
+    <div id="jermaScreamer" class="jerma">
+      <img class="jerma" src="/assets/img/png/jerma.png" alt="">
+    </div>
+    <div class="end-panel" id="lost-panel">
+      <div class="end-content">
+        <h2 id="end-text-lost" class="lost-text"></h2>
+        <img src="/assets/img/png/lostAnim.gif" alt="Lost Animation">
+        <div style="display: flex; align-items: center; gap: 30px">
+          <button id="replay" class="replay-button">REPLAY</button>
+          <a href="/index.html">
+            <button id="lobby" class="replay-button">BACK TO LOBBY</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="end-panel" id="win-panel">
+      <div class="end-content">
+        <h2 id="end-text-win" class="win-text"></h2>
+        <img src="/assets/img/png/among-us.gif" alt="Win Animation">
+        <div style="display: flex; align-items: center; gap: 30px">
+          <button id="replay" class="replay-button">REPLAY</button>
+          <a href="/index.html">
+            <button id="lobby" class="replay-button">BACK TO LOBBY</button>
+          </a>
+        </div>
+      </div>
+    </div>
+    
     <div class="layer-blur" id="layer">
       <img
         id="buttonEmergency"
@@ -21,39 +50,37 @@
           <div class="user-name">
             <p class="pseudo" id="user"></p>
           </div>
-         <ul>
-          <div class="info">
-              <img src="/assets/img/png/fleche.png" alt="">
+          <ul>
+            <div class="info">
+              <img src="/assets/img/png/fleche.png" alt="" />
               <p>Game Won: <span id="info-data-win">0</span></p>
-          </div>
-          <div class="info">
-              <img src="/assets/img/png/fleche.png" alt="">
-              <p>Game Lost: <span id="info-data-lost">0</span> </p>
-          </div>
-          <div class="info">
-              <img src="/assets/img/png/fleche.png" alt="">
-              <p>Missing Vents: <span id="info-data-vents">0</span> </p>
-          </div>
-          <div class="info">
-              <img src="/assets/img/png/fleche.png" alt="">
-              <p>Remaining try: <span id="info-data-try">0</span> </p>
-          </div>
-         </ul>
+            </div>
+            <div class="info">
+              <img src="/assets/img/png/fleche.png" alt="" />
+              <p>Game Lost: <span id="info-data-lost">0</span></p>
+            </div>
+            <div class="info">
+              <img src="/assets/img/png/fleche.png" alt="" />
+              <p>Missing Vents: <span id="info-data-vents">0</span></p>
+            </div>
+            <div class="info">
+              <img src="/assets/img/png/fleche.png" alt="" />
+              <p>Remaining try: <span id="info-data-try">0</span></p>
+            </div>
+          </ul>
         </div>
         <div class="title">
-          <img src="/assets/img/png/red-among.png" alt="">
+          <img src="/assets/img/png/red-among.png" alt="" />
           <div>
             <h1>Among Us</h1>
             <p>Hide and Seek</p>
           </div>
         </div>
-        <img class="rules" src="/assets/img/png/rules.png" alt="">
+        <img class="rules" src="/assets/img/png/rules.png" alt="" />
       </div>
       <div class="map">
-        <div class="hiding-spots">
-
-        </div>
-        <img src="/assets/img/png/map.png" alt="" >
+        <div class="hiding-spots"></div>
+        <img src="/assets/img/png/map.png" alt="" />
       </div>
     </div>
     <script src="/script/amongUs.js"></script>

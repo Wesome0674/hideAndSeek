@@ -6,6 +6,7 @@ let user2Hit = document.getElementById("user2Hit");
 let user1Jauge = document.getElementById("jaugeUser1");
 let user2Jauge = document.getElementById("jaugeUser2");
 let replayButton = document.getElementById("replay");
+let winner = document.getElementById("winner");
 
 user1Hit.innerHTML = user1NumberHit;
 user2Hit.innerHTML = user2NumberHit;
@@ -33,6 +34,11 @@ const stopGame = () => {
   clearInterval(decrementInterval);
   document.removeEventListener("keyup", handleKeyPress);
   console.log("Jeu terminé !");
+  if (user1NumberHit > user2NumberHit) {
+    winner.innerHTML = "Winner: number 1";
+  } else {
+    winner.innerHTML = "Winner: number 2";
+  }
   replayButton.style.display = "block";
 };
 

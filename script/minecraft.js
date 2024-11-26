@@ -56,7 +56,7 @@ const resetGame = () => {
   lastHitTimeUser2 = Date.now();
   replayButton.style.display = "none";
   document.addEventListener("keyup", handleKeyPress);
-
+  winner.innerHTML = "";
   startDecrement();
 };
 

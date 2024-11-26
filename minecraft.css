@@ -172,6 +172,10 @@ h1 {
     height: 10px;
     width: 0%;
     background-color: black;
-    margin-bottom: 20px;
+}
 
+.jauge-container {
+  width: 500px;
+  border: 1px solid black;
+  padding: 15px 20px;
 }

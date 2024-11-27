@@ -48,8 +48,8 @@ const resetGame = () => {
   user2NumberHit = 0;
   user1Hit.innerHTML = user1NumberHit;
   user2Hit.innerHTML = user2NumberHit;
-  user1Jauge.style.width = "0%";
-  user2Jauge.style.width = "0%";
+  user1Jauge.style.height = "0%";
+  user2Jauge.style.height = "0%";
   user1Jauge.style.backgroundColor = "green";
   user2Jauge.style.backgroundColor = "green";
   lastHitTimeUser1 = Date.now();
@@ -71,13 +71,13 @@ const handleKeyPress = (e) => {
   if (e.key === "q" || e.key === "Q") {
     user1NumberHit++;
     user1Hit.innerHTML = user1NumberHit;
-    user1Jauge.style.width = user1NumberHit + "%";
+    user1Jauge.style.height = user1NumberHit + "%";
     changeColorOfJauge(user1NumberHit, user1Jauge);
     lastHitTimeUser1 = currentTime;
   } else if (e.key === "m" || e.key === "M") {
     user2NumberHit++;
     user2Hit.innerHTML = user2NumberHit;
-    user2Jauge.style.width = user2NumberHit + "%";
+    user2Jauge.style.height = user2NumberHit + "%";
     changeColorOfJauge(user2NumberHit, user2Jauge);
     lastHitTimeUser2 = currentTime;
   }
@@ -90,14 +90,14 @@ const startDecrement = () => {
     if (currentTime - lastHitTimeUser1 >= 200 && user1NumberHit > 0) {
       user1NumberHit--;
       user1Hit.innerHTML = user1NumberHit;
-      user1Jauge.style.width = user1NumberHit + "%";
+      user1Jauge.style.height = user1NumberHit + "%";
       changeColorOfJauge(user1NumberHit, user1Jauge);
     }
 
     if (currentTime - lastHitTimeUser2 >= 200 && user2NumberHit > 0) {
       user2NumberHit--;
       user2Hit.innerHTML = user2NumberHit;
-      user2Jauge.style.width = user2NumberHit + "%";
+      user2Jauge.style.height = user2NumberHit + "%";
       changeColorOfJauge(user2NumberHit, user2Jauge);
     }
 

@@ -1,22 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="minecraft.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="minecraft.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/minecraft-framework-css@1.1.9/css/main.css"
+    />
     <title>Document</title>
-</head>
-<body>
-    <h1>Touche Q nombre de tape: <span id="user1Hit">0</span></h1>
-    <div class="jauge-container">
-        <div class="jauge" id="jaugeUser1"></div>
+  </head>
+  <body>
+    <div class="game-container img">
+      <div class="header">
+        <h1>First To mine Diamond Wins</h1>
+      </div>
+      <div class="game-content">
+        <div class="score">
+          <h1 class="button-java">Q: <span id="user1Hit">0</span></h1>
+          <div class="jauge-container img">
+            <div class="jauge" id="jaugeUser1"></div>
+          </div>
+        </div>
+        <div class="score">
+          <h1 class="button-java">M: <span id="user2Hit">0</span></h1>
+          <div class="jauge-container img">
+            <div class="jauge" id="jaugeUser2"></div>
+          </div>
+        </div>
+      </div>
+      <p id="winner"></p>
+      <button class="button" id="replay">Replay</button>
     </div>
-    <h1>Touche M nombre de tape: <span id="user2Hit">0</span></h1>
-    <div class="jauge-container">
-        <div class="jauge"  id="jaugeUser2"></div>
-    </div>
-    <p id="winner"></p>
-    <button id="replay">Replay</button>
     <script src="/script/minecraft.js"></script>
-</body>
+    <script src="https://unpkg.com/minecraft-framework-css@1.1.9/css/assets/script.js"></script>
+  </body>
 </html>

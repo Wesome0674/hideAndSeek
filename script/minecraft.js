@@ -7,6 +7,7 @@ let user1Jauge = document.getElementById("jaugeUser1");
 let user2Jauge = document.getElementById("jaugeUser2");
 let replayButton = document.getElementById("replay");
 let winner = document.getElementById("winner");
+let pickax = document.getElementById("pickax");
 
 user1Hit.innerHTML = user1NumberHit;
 user2Hit.innerHTML = user2NumberHit;
@@ -16,6 +17,7 @@ let lastHitTimeUser1 = Date.now();
 let lastHitTimeUser2 = Date.now();
 
 let decrementInterval;
+let currentPickaxIndex = 0;
 
 const changeColorOfJauge = (userScore, userJauge) => {
   if (userScore < 25) {
@@ -61,8 +63,11 @@ const resetGame = () => {
 };
 
 const handleKeyPress = (e) => {
+  setTimeout(() => {
+    updatePickaxImage();
+  }, 610);
+  
   const currentTime = Date.now();
-
   if (user1NumberHit >= 100 || user2NumberHit >= 100) {
     stopGame();
     return;
@@ -105,6 +110,23 @@ const startDecrement = () => {
       stopGame();
     }
   }, 200);
+};
+
+const pickaxImg = [
+  "/assets/img/png/pickax/Frame 26.png",
+  "/assets/img/png/pickax/Frame 27.png",
+  "/assets/img/png/pickax/Frame 28.png",
+  "/assets/img/png/pickax/Frame 29.png",
+  "/assets/img/png/pickax/Frame 30.png",
+  "/assets/img/png/pickax/Frame 31.png",
+];
+
+const updatePickaxImage = () => {
+  pickaxImg.forEach((img, index) => {
+    setTimeout(() => {
+      pickax.src = img;
+    }, 200 * index);
+  });
 };
 
 replayButton.addEventListener("click", resetGame);

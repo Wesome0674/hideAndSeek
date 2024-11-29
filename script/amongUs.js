@@ -242,3 +242,37 @@ hiddingSpot.forEach((spot, index) => {
     }
   });
 });
+
+motion.style.display = "none";
+
+const changeSpots = () => {
+  const motion = document.getElementById("motion");
+  setInterval(() => {
+    motion.style.display = "block";
+    setTimeout(() => {
+      motion.style.display = "none";
+    }, 1000);
+  }, 5000);
+};
+
+changeSpots();
+
+document.addEventListener('mousemove', (e) => {
+  const distanceFromEdge = 100; 
+  const scrollSpeed = 30; 
+
+  if (e.clientY > window.innerHeight - distanceFromEdge) {
+      window.scrollBy(0, scrollSpeed);
+  }
+  if (e.clientY < distanceFromEdge) {
+      window.scrollBy(0, -scrollSpeed);
+  }
+
+  if (e.clientX > window.innerWidth - distanceFromEdge) {
+      window.scrollBy(scrollSpeed, 0);
+  }
+
+  if (e.clientX < distanceFromEdge) {
+      window.scrollBy(-scrollSpeed, 0);
+  }
+});

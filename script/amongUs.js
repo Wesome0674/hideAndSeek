@@ -1,68 +1,4 @@
-const spots = [
-  {
-    img: "assets/img/png/red-among.png",
-    posX: "185px",
-    posY: 0,
-    isImposter: false,
-    wasClicked: false, // Nouveau champ
-  },
-  {
-    img: "assets/img/png/red-among.png",
-    posX: 0,
-    posY: 0,
-    isImposter: false,
-    wasClicked: false, // Nouveau champ
-  },
-  {
-    img: "assets/img/png/red-among.png",
-    posX: "185px",
-    posY: "200px",
-    isImposter: false,
-    wasClicked: false, // Nouveau champ
-  },
-  {
-    img: "assets/img/png/red-among.png",
-    posX: "50px",
-    posY: "200px",
-    isImposter: false,
-    wasClicked: false, // Nouveau champ
-  },
-  {
-    img: "assets/img/png/red-among.png",
-    posX: "300px",
-    posY: "300px",
-    isImposter: false,
-    wasClicked: false, // Nouveau champ
-  },
-  {
-    img: "assets/img/png/red-among.png",
-    posX: "500px",
-    posY: "300px",
-    isImposter: false,
-    wasClicked: false, // Nouveau champ
-  },
-  {
-    img: "assets/img/png/red-among.png",
-    posX: "700px",
-    posY: "300px",
-    isImposter: false,
-    wasClicked: false, // Nouveau champ
-  },
-  {
-    img: "assets/img/png/red-among.png",
-    posX: "900px",
-    posY: "300px",
-    isImposter: false,
-    wasClicked: false, // Nouveau champ
-  },
-  {
-    img: "assets/img/png/red-among.png",
-    posX: "1100px",
-    posY: "300px",
-    isImposter: false,
-    wasClicked: false, // Nouveau champ
-  },
-];
+import { spots } from "./spots.js";
 
 const user = document.getElementById("user");
 const layer = document.getElementById("layer");
@@ -74,8 +10,9 @@ const dataWin = document.getElementById("info-data-win");
 const dataLost = document.getElementById("info-data-lost");
 const lostPanel = document.getElementById("lost-panel");
 const winPanel = document.getElementById("win-panel");
-let LobbyButton = document.getElementById("lobby");
 let jerma = document.getElementById("jermaScreamer");
+const replayButtons = document.querySelectorAll("#replay");
+const emergencyButton = document.getElementById("buttonEmergency");
 
 lostPanel.style.display = "none";
 winPanel.style.display = "none";
@@ -86,17 +23,62 @@ let numberOfTries = 7;
 let gameWon = 0;
 let gameLost = 0;
 let randomSpot;
+let changeSpotsInterval;
 
 let emergency = new Audio("/assets/sounds/emergencySound.mp3");
 let wrong = new Audio("/assets/sounds/wrong.mp3");
 let lostSound = new Audio("/assets/sounds/win.mp3");
 let wonSound = new Audio("/assets/sounds/gameLost.mp3");
+let ventIn = new Audio("/assets/sounds/ventIn.mp3");
 
 user.innerHTML = localStorage.getItem("userName");
 dataVent.innerHTML = numberOfVents;
 dataTry.innerHTML = numberOfTries;
 dataWin.innerHTML = gameWon;
 dataLost.innerHTML = gameLost;
+
+const changeSpots = () => {
+  const motion = document.getElementById("motion");
+
+  changeSpotsInterval = setInterval(() => {
+    const availableSpots = spots.filter((spot) => !spot.wasClicked);
+    ventIn.play();
+
+    if (availableSpots.length > 0) {
+      spots[randomSpot].isImposter = false;
+
+      const newSpotIndex = Math.floor(Math.random() * availableSpots.length);
+      const newSpot = availableSpots[newSpotIndex];
+
+      randomSpot = spots.indexOf(newSpot);
+      spots[randomSpot].isImposter = true;
+
+      motion.style.display = "block";
+      console.log("Nouvel emplacement de l'imposteur:", randomSpot);
+
+      setTimeout(() => {
+        motion.style.display = "none";
+      }, 1000);
+    }
+  }, 5000);
+};
+
+const displaySpots = () => {
+  map.innerHTML = spots
+    .map((spot, index) => {
+      return `
+      <div id="spot-${index}" class="spot" style="position: absolute; left:${spot.posX}; top:${spot.posY}; width: 50px;">
+        <img src="${spot.img}" />
+        <img class="red-cross" src="/assets/img/png/cross-red.webp" />
+      </div>`;
+    })
+    .join("");
+};
+
+const revealSpot = () => {
+  spots[randomSpot].img = "/assets/img/png/jerma.png";
+  displaySpots();
+};
 
 const setImposter = () => {
   randomSpot = Math.floor(Math.random() * spots.length);
@@ -105,8 +87,6 @@ const setImposter = () => {
   console.log(spots);
   return randomSpot;
 };
-
-const replayButtons = document.querySelectorAll("#replay");
 
 replayButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -120,7 +100,7 @@ replayButtons.forEach((button) => {
 
     spots.forEach((spot) => {
       spot.isImposter = false;
-      spot.wasClicked = false; // Réinitialiser la propriété
+      spot.wasClicked = false;
     });
     setImposter();
 
@@ -128,6 +108,7 @@ replayButtons.forEach((button) => {
     crosses.forEach((cross) => (cross.style.display = "none"));
 
     console.log("Le jeu a été réinitialisé pour une nouvelle partie !");
+    changeSpots();
   });
 });
 
@@ -159,16 +140,13 @@ function typeWriter(text) {
   write();
 }
 
-const emergencyButton = document.getElementById("buttonEmergency");
-
 const isGameLost = () => {
   if (numberOfTries <= 1) {
-    // Remplacer l'image de l'imposteur par celle de Jerma
-    spots[randomSpot].img = "/assets/img/png/jerma.png";
+    clearInterval(changeSpotsInterval);
+    console.log("Jerma ne peut plus bouger : partie perdue.");
+    revealSpot();
     lostSound.play();
-
     setTimeout(() => {
-      // Affichage du panneau de fin après 3 secondes
       lostPanel.style.display = "grid";
       typeWriter("lost");
       gameLost++;
@@ -178,6 +156,8 @@ const isGameLost = () => {
 };
 
 const isGameWon = () => {
+  clearInterval(changeSpotsInterval);
+  console.log("Jerma ne peut plus bouger : partie gagnée.");
   jerma.style.display = "none";
   winPanel.style.display = "grid";
   typeWriter("win");
@@ -190,37 +170,23 @@ emergencyButton.addEventListener("click", () => {
   emergency.play();
   setTimeout(() => {
     layer.style.display = "none";
+    setImposter();
+    changeSpots();
   }, 1000);
 });
 
-// Création des spots et de la croix pour chaque spot
-map.innerHTML = spots
-  .map((spot, index) => {
-    return `
-      <div id="spot-${index}" class="spot" style="position: absolute; left:${spot.posX}; top:${spot.posY};">
-        <img src="${spot.img}" />
-        <img class="red-cross" src="/assets/img/png/cross-red.webp" />
-      </div>`;
-  })
-  .join("");
+displaySpots();
 
-setImposter();
-
-// Récupérer tous les spots
 const hiddingSpot = document.querySelectorAll(".spot");
 
-// Ajouter un événement de clic sur chaque spot
 hiddingSpot.forEach((spot, index) => {
   spot.addEventListener("click", () => {
     const cross = spot.querySelector(".red-cross");
 
-    // Vérifier si le spot a déjà été cliqué
     if (spots[index].wasClicked) {
       console.log("Ce spot a déjà été cliqué !");
-      return; // Ignorer le reste de l'action
+      return;
     }
-
-    // Marquer le spot comme cliqué
     spots[index].wasClicked = true;
 
     if (spots[index].isImposter) {
@@ -245,34 +211,22 @@ hiddingSpot.forEach((spot, index) => {
 
 motion.style.display = "none";
 
-const changeSpots = () => {
-  const motion = document.getElementById("motion");
-  setInterval(() => {
-    motion.style.display = "block";
-    setTimeout(() => {
-      motion.style.display = "none";
-    }, 1000);
-  }, 5000);
-};
-
-changeSpots();
-
-document.addEventListener('mousemove', (e) => {
-  const distanceFromEdge = 100; 
-  const scrollSpeed = 30; 
+document.addEventListener("mousemove", (e) => {
+  const distanceFromEdge = 100;
+  const scrollSpeed = 30;
 
   if (e.clientY > window.innerHeight - distanceFromEdge) {
-      window.scrollBy(0, scrollSpeed);
+    window.scrollBy(0, scrollSpeed);
   }
   if (e.clientY < distanceFromEdge) {
-      window.scrollBy(0, -scrollSpeed);
+    window.scrollBy(0, -scrollSpeed);
   }
 
   if (e.clientX > window.innerWidth - distanceFromEdge) {
-      window.scrollBy(scrollSpeed, 0);
+    window.scrollBy(scrollSpeed, 0);
   }
 
   if (e.clientX < distanceFromEdge) {
-      window.scrollBy(-scrollSpeed, 0);
+    window.scrollBy(-scrollSpeed, 0);
   }
 });

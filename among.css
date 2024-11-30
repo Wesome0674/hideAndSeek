@@ -318,6 +318,7 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
+  width: 120%;
   display: none;
   animation: scale 0.3s ease-in;
 }
@@ -405,7 +406,7 @@ h1 {
   top: 0;
   left: 50%;
   transform: translate(-50%);
-  font-size: 45px;
-  color: #c51111;
-  text-transform: uppercase;
+  width: 500px;
 }
+
+

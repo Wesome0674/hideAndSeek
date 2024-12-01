@@ -12,19 +12,61 @@
   </head>
   <body>
     <div class="game-container img">
-      <div class="header">
+      <div class="header" style="width: 100%">
         <h1>First To mine Diamond Wins</h1>
       </div>
       <div class="game-content">
         <div class="score">
-          <h1 class="button-java" style="width: 70px" >Q: <span id="user1Hit">0</span></h1>
+          <p style="color: white; font-size: 18px">Touche M</p>
+          <h1 class="button-java" style="width: 70px">
+            <span id="user1Hit">0</span>
+          </h1>
           <div class="jauge-container img">
             <div class="jauge" id="jaugeUser1"></div>
           </div>
         </div>
-        <img style="width: 120px;" id="pickax" src="/assets/img/png/pickax/Frame 26.png" alt="">
+        <div class="mineBlocks">
+          <div id="blocks1">
+            <img
+              style="margin-bottom: 20px"
+              src="/assets/img/png/trophy.png"
+              alt=""
+            />
+          </div>
+          <img
+            style="width: 120px; height: 150px"
+            id="pickax1"
+            src="/assets/img/png/pickax/Frame 26.png"
+            alt=""
+          />
+        </div>
+        <div class="versus">
+          <div class="separator"></div>
+          <img style="width: 50px" src="/assets/img/png/mob1.png" alt="" />
+          <h2>VS</h2>
+          <img style="width: 50px" src="/assets/img/png/mob2.png" alt="" />
+          <div class="separator"></div>
+        </div>
+        <div class="mineBlocks">
+          <div id="blocks2">
+            <img
+              style="margin-bottom: 20px"
+              src="/assets/img/png/trophy.png"
+              alt=""
+            />
+          </div>
+          <img
+            style="width: 120px; height: 150px"
+            id="pickax2"
+            src="/assets/img/png/pickax/Frame 26.png"
+            alt=""
+          />
+        </div>
         <div class="score">
-          <h1 class="button-java" style="width: 70px;">M: <span id="user2Hit">0</span></h1>
+          <p style="color: white; font-size: 18px">Touche Q</p>
+          <h1 class="button-java" style="width: 70px">
+            <span id="user2Hit">0</span>
+          </h1>
           <div class="jauge-container img">
             <div class="jauge" id="jaugeUser2"></div>
           </div>

@@ -27,7 +27,7 @@ let changeSpotsInterval;
 
 let emergency = new Audio("/assets/sounds/emergencySound.mp3");
 let wrong = new Audio("/assets/sounds/wrong.mp3");
-let lostSound = new Audio("/assets/sounds/win.mp3");
+let lostSound = new Audio("/assets/sounds/lose.mp3");
 let wonSound = new Audio("/assets/sounds/gameLost.mp3");
 let ventIn = new Audio("/assets/sounds/ventIn.mp3");
 
@@ -36,6 +36,10 @@ dataVent.innerHTML = numberOfVents;
 dataTry.innerHTML = numberOfTries;
 dataWin.innerHTML = gameWon;
 dataLost.innerHTML = gameLost;
+
+const initialSpots = spots.map((spot) => ({
+  ...spot,
+}));
 
 const changeSpots = () => {
   const motion = document.getElementById("motion");
@@ -66,17 +70,48 @@ const changeSpots = () => {
 const displaySpots = () => {
   map.innerHTML = spots
     .map((spot, index) => {
-      return `
+      return ` 
       <div id="spot-${index}" class="spot" style="position: absolute; left:${spot.posX}; top:${spot.posY}; width: 50px;">
         <img src="${spot.img}" />
         <img class="red-cross" src="/assets/img/png/cross-red.webp" />
       </div>`;
     })
     .join("");
+
+  const hiddingSpot = document.querySelectorAll(".spot");
+  hiddingSpot.forEach((spot, index) => {
+    spot.addEventListener("click", () => {
+      const cross = spot.querySelector(".red-cross");
+
+      if (spots[index].wasClicked) {
+        console.log("Ce spot a déjà été cliqué !");
+        return;
+      }
+      spots[index].wasClicked = true;
+
+      if (spots[index].isImposter) {
+        console.log("C'est un imposter !");
+        jerma.style.display = "block";
+        wonSound.play();
+        setTimeout(() => {
+          isGameWon();
+        }, 3000);
+      } else {
+        console.log("Ce n'est pas un imposter.");
+        isGameLost();
+        numberOfVents--;
+        dataVent.innerHTML = numberOfVents;
+        numberOfTries--;
+        dataTry.innerHTML = numberOfTries;
+        wrong.play();
+        cross.style.display = "block";
+      }
+    });
+  });
 };
 
 const revealSpot = () => {
-  spots[randomSpot].img = "/assets/img/png/jerma.png";
+  spots[randomSpot].img = "/assets/img/png/reveal.png";
   displaySpots();
 };
 
@@ -98,10 +133,14 @@ replayButtons.forEach((button) => {
     dataVent.innerHTML = numberOfVents;
     dataTry.innerHTML = numberOfTries;
 
+    spots.length = 0;
+    spots.push(...initialSpots);
+
     spots.forEach((spot) => {
       spot.isImposter = false;
       spot.wasClicked = false;
     });
+
     setImposter();
 
     const crosses = document.querySelectorAll(".red-cross");
@@ -109,6 +148,7 @@ replayButtons.forEach((button) => {
 
     console.log("Le jeu a été réinitialisé pour une nouvelle partie !");
     changeSpots();
+    displaySpots();
   });
 });
 
@@ -176,38 +216,6 @@ emergencyButton.addEventListener("click", () => {
 });
 
 displaySpots();
-
-const hiddingSpot = document.querySelectorAll(".spot");
-
-hiddingSpot.forEach((spot, index) => {
-  spot.addEventListener("click", () => {
-    const cross = spot.querySelector(".red-cross");
-
-    if (spots[index].wasClicked) {
-      console.log("Ce spot a déjà été cliqué !");
-      return;
-    }
-    spots[index].wasClicked = true;
-
-    if (spots[index].isImposter) {
-      console.log("C'est un imposter !");
-      jerma.style.display = "block";
-      wonSound.play();
-      setTimeout(() => {
-        isGameWon();
-      }, 3000);
-    } else {
-      console.log("Ce n'est pas un imposter.");
-      isGameLost();
-      numberOfVents--;
-      dataVent.innerHTML = numberOfVents;
-      numberOfTries--;
-      dataTry.innerHTML = numberOfTries;
-      wrong.play();
-      cross.style.display = "block";
-    }
-  });
-});
 
 motion.style.display = "none";
 

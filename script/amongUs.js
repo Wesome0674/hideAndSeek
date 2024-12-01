@@ -19,7 +19,7 @@ winPanel.style.display = "none";
 jerma.style.display = "none";
 
 let numberOfVents = 64;
-let numberOfTries = 7;
+let numberOfTries = 15;
 let gameWon = 0;
 let gameLost = 0;
 let randomSpot;
@@ -40,6 +40,14 @@ dataLost.innerHTML = gameLost;
 const initialSpots = spots.map((spot) => ({
   ...spot,
 }));
+
+const resetSpots = () => {
+  spots.forEach((spot) => {
+    spot.isImposter = false;
+    spot.wasClicked = false;
+    spot.img = initialSpots[spots.indexOf(spot)].img;
+  });
+};
 
 const changeSpots = () => {
   const motion = document.getElementById("motion");
@@ -84,20 +92,17 @@ const displaySpots = () => {
       const cross = spot.querySelector(".red-cross");
 
       if (spots[index].wasClicked) {
-        console.log("Ce spot a déjà été cliqué !");
         return;
       }
       spots[index].wasClicked = true;
 
       if (spots[index].isImposter) {
-        console.log("C'est un imposter !");
         jerma.style.display = "block";
         wonSound.play();
         setTimeout(() => {
           isGameWon();
         }, 3000);
       } else {
-        console.log("Ce n'est pas un imposter.");
         isGameLost();
         numberOfVents--;
         dataVent.innerHTML = numberOfVents;
@@ -116,11 +121,11 @@ const revealSpot = () => {
 };
 
 const setImposter = () => {
+  if (randomSpot !== undefined) {
+    spots[randomSpot].isImposter = false;
+  }
   randomSpot = Math.floor(Math.random() * spots.length);
-  console.log("Spot imposter choisi:", randomSpot);
   spots[randomSpot].isImposter = true;
-  console.log(spots);
-  return randomSpot;
 };
 
 replayButtons.forEach((button) => {
@@ -129,24 +134,17 @@ replayButtons.forEach((button) => {
     winPanel.style.display = "none";
 
     numberOfVents = 64;
-    numberOfTries = 7;
+    numberOfTries = 15;
     dataVent.innerHTML = numberOfVents;
     dataTry.innerHTML = numberOfTries;
 
-    spots.length = 0;
-    spots.push(...initialSpots);
-
-    spots.forEach((spot) => {
-      spot.isImposter = false;
-      spot.wasClicked = false;
-    });
-
-    setImposter();
+    resetSpots();
 
     const crosses = document.querySelectorAll(".red-cross");
     crosses.forEach((cross) => (cross.style.display = "none"));
 
-    console.log("Le jeu a été réinitialisé pour une nouvelle partie !");
+    clearInterval(changeSpotsInterval);
+    setImposter();
     changeSpots();
     displaySpots();
   });
@@ -183,7 +181,6 @@ function typeWriter(text) {
 const isGameLost = () => {
   if (numberOfTries <= 1) {
     clearInterval(changeSpotsInterval);
-    console.log("Jerma ne peut plus bouger : partie perdue.");
     revealSpot();
     lostSound.play();
     setTimeout(() => {
@@ -197,7 +194,6 @@ const isGameLost = () => {
 
 const isGameWon = () => {
   clearInterval(changeSpotsInterval);
-  console.log("Jerma ne peut plus bouger : partie gagnée.");
   jerma.style.display = "none";
   winPanel.style.display = "grid";
   typeWriter("win");
@@ -233,7 +229,6 @@ document.addEventListener("mousemove", (e) => {
   if (e.clientX > window.innerWidth - distanceFromEdge) {
     window.scrollBy(scrollSpeed, 0);
   }
-
   if (e.clientX < distanceFromEdge) {
     window.scrollBy(-scrollSpeed, 0);
   }

@@ -57,17 +57,15 @@ const displayBlocks = (blocks) => {
   }
 };
 
-window.addEventListener("load", (event) => { 
-  caveSound.play()
+window.addEventListener("load", (event) => {
+  caveSound.play();
 });
-
 
 displayBlocks(blocks1);
 displayBlocks(blocks2);
 
 const removeBlocks = (userScore, blocks, userBlocksRemoved) => {
   const score = [25, 50, 75, 100];
-  pickaxSound.play()
   for (let i = userBlocksRemoved; i < score.length; i++) {
     if (userScore >= score[i]) {
       if (blocks.children.length > 0) {
@@ -99,11 +97,11 @@ const stopGame = () => {
   winner.innerHTML =
     user1NumberHit > user2NumberHit ? "Winner: Player 1" : "Winner: Player 2";
   replayButton.style.display = "block";
-  winnerSound.play()
+  winnerSound.play();
 };
 
 const resetGame = () => {
-  caveSound.play()
+  caveSound.play();
   user1NumberHit = 0;
   user2NumberHit = 0;
   blocksRemovedUser1 = 0;
@@ -130,6 +128,7 @@ const resetGame = () => {
 };
 
 const handleKeyPress = (e) => {
+  pickaxSound.play();
   const currentTime = Date.now();
   if (user1NumberHit >= 100 || user2NumberHit >= 100) {
     stopGame();
@@ -141,7 +140,11 @@ const handleKeyPress = (e) => {
     user1Hit.innerHTML = user1NumberHit;
     user1Jauge.style.height = user1NumberHit + "%";
     changeColorOfJauge(user1NumberHit, user1Jauge);
-    blocksRemovedUser1 = removeBlocks(user1NumberHit, blocks1, blocksRemovedUser1);
+    blocksRemovedUser1 = removeBlocks(
+      user1NumberHit,
+      blocks1,
+      blocksRemovedUser1
+    );
     lastHitTimeUser1 = currentTime;
 
     if (!user1AnimationLock) {
@@ -155,7 +158,11 @@ const handleKeyPress = (e) => {
     user2Hit.innerHTML = user2NumberHit;
     user2Jauge.style.height = user2NumberHit + "%";
     changeColorOfJauge(user2NumberHit, user2Jauge);
-    blocksRemovedUser2 = removeBlocks(user2NumberHit, blocks2, blocksRemovedUser2);
+    blocksRemovedUser2 = removeBlocks(
+      user2NumberHit,
+      blocks2,
+      blocksRemovedUser2
+    );
     lastHitTimeUser2 = currentTime;
 
     if (!user2AnimationLock) {

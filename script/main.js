@@ -42,7 +42,7 @@ submitForm.addEventListener("click", (e) => {
         playSound.play();
         setTimeout(() => {
           window.location.href = "/amongUs.html";
-        },3000)
+        }, 3000);
         break;
       case "minecraft":
         window.location.href = "/minecraft.html";
@@ -53,4 +53,3 @@ submitForm.addEventListener("click", (e) => {
     }
   }
 });
-
